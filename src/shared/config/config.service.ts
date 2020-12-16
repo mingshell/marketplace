@@ -6,7 +6,7 @@ export class ConfigService {
   private readonly envConfing: { [key: string]: string };
   static env: string = process.env.ENV;
   constructor() {
-    if (ConfigService.env !== 'prod') {
+    if (ConfigService.env !== 'production') {
       const envFilePath = __dirname + '/../../../.env';
       const existsPath = fs.existsSync(envFilePath);
       if (!existsPath) {
@@ -17,7 +17,7 @@ export class ConfigService {
     } else {
       this.envConfing = {
         PORT: process.env.PORT,
-        ENV: process.env.ENV,
+        ENV: process.env.NODE_ENV,
         CONNECT_DATABASE_DEV: process.env.CONNECT_DATABASE_DEV,
         CONNECT_DATABASE_TEST: process.env.CONNECT_DATABASE_TEST,
         CONNECT_DATABASE_PROD: process.env.CONNECT_DATABASE_PROD,
