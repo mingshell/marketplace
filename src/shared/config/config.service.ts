@@ -4,8 +4,12 @@ import { Configuration } from './config.keys';
 
 export class ConfigService {
   private readonly envConfing: { [key: string]: string };
-  static env: string = process.env.ENV;
+  static env: string;
+
   constructor() {
+    ConfigService.env = process.env.NODE_ENV;
+    console.log(ConfigService.env);
+    console.log(process.env.PORT);
     if (ConfigService.env !== 'production') {
       const envFilePath = __dirname + '/../../../.env';
       const existsPath = fs.existsSync(envFilePath);
