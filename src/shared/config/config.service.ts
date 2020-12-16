@@ -36,7 +36,7 @@ export class ConfigService {
       case 'test':
         return this.get(Configuration.CONNECT_DATABASE_TEST);
         break;
-      case 'prod':
+      case 'production':
         return this.get(Configuration.CONNECT_DATABASE_PROD);
         break;
       default:
