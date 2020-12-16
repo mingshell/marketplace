@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { Configuration } from './shared/config/config.keys';
 import { ConfigModule } from './shared/config/config.module';
 import { ConfigService } from './shared/config/config.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigService } from './shared/config/config.service';
         useFindAndModify: false,
       },
     ),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService, Logger],
