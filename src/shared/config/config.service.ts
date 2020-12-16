@@ -17,7 +17,7 @@ export class ConfigService {
     } else {
       this.envConfing = {
         PORT: process.env.PORT,
-        ENV: process.env.NODE_ENV,
+        NODE_ENV: process.env.NODE_ENV,
         CONNECT_DATABASE_DEV: process.env.CONNECT_DATABASE_DEV,
         CONNECT_DATABASE_TEST: process.env.CONNECT_DATABASE_TEST,
         CONNECT_DATABASE_PROD: process.env.CONNECT_DATABASE_PROD,

@@ -11,7 +11,7 @@ import { ConfigService } from './shared/config/config.service';
     ConfigModule,
     MongooseModule.forRoot(
       new ConfigService().getDatabaseConnection(
-        new ConfigService().get(Configuration.ENV),
+        new ConfigService().get(Configuration.NODE_ENV),
       ),
       {
         useFindAndModify: false,
@@ -29,7 +29,7 @@ export class AppModule {
     private logger: Logger,
   ) {
     AppModule.port = this._configService.get(Configuration.PORT);
-    AppModule.env = this._configService.get(Configuration.ENV);
+    AppModule.env = this._configService.get(Configuration.NODE_ENV);
     logger.log('[ API REST ] PORT:  ' + AppModule.port);
     logger.log('[ API REST ] ENV:  ' + AppModule.env);
   }
