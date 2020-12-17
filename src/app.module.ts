@@ -7,7 +7,7 @@ import { ConfigModule } from './shared/config/config.module';
 import { ConfigService } from './shared/config/config.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { JwtService } from '@nestjs/jwt';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
@@ -19,12 +19,15 @@ import { JwtService } from '@nestjs/jwt';
       ),
       {
         useFindAndModify: false,
+        useCreateIndex: true,
       },
     ),
     UsersModule,
     AuthModule,
+    ProductsModule,
   ],
   controllers: [AppController],
+
   providers: [AppService, ConfigService, Logger],
 })
 export class AppModule {

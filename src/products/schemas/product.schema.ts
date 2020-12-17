@@ -3,15 +3,23 @@ import { Document } from 'mongoose';
 import { ROLES, STATUS } from 'src/shared/static/constants';
 
 @Schema()
-export class User extends Document {
-  @Prop({ type: String, required: true })
-  user: string;
+export class Product extends Document {
+  _id: false;
+
+  @Prop({ type: String, unique: true, index: true, required: true })
+  sku: string;
 
   @Prop({ type: String, required: true })
-  password: string;
+  sellerId: string;
 
-  @Prop({ type: String, required: true, default: ROLES[1] })
-  rol: string;
+  @Prop({ type: String, required: true })
+  title: string;
+
+  @Prop({ type: Number, required: true, default: 0 })
+  quantity: number;
+
+  @Prop({ type: Number, required: true, default: 0 })
+  price: number;
 
   @Prop({ type: Date, required: true, default: Date.now })
   createdAt: Date;
@@ -28,4 +36,4 @@ export class User extends Document {
   status: string;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const ProductSchema = SchemaFactory.createForClass(Product);

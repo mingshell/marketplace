@@ -15,13 +15,13 @@ import { SECRET_KEY_TOKEN } from 'src/shared/static/constants';
   imports: [
     UsersModule,
     PassportModule,
+    UsersModule,
     JwtModule.register({
       secret: SECRET_KEY_TOKEN,
       signOptions: { expiresIn: '24h' },
     }),
-    MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
   ],
-  providers: [AuthService, UsersService, LocalStrategy, JwtStrategy, Logger],
+  providers: [AuthService, LocalStrategy, JwtStrategy, Logger],
   controllers: [AuthController],
 })
 export class AuthModule {}

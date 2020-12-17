@@ -3,7 +3,6 @@ import {
   ConflictException,
   Controller,
   Get,
-  HttpException,
   HttpStatus,
   Post,
   Res,
@@ -11,7 +10,6 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { plainToClass } from 'class-transformer';
 import { Roles } from 'src/shared/decorators/roles.decorator';
 import { UserDto } from './dtos/users.dto';
 import { UsersService } from './users.service';
