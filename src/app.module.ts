@@ -6,10 +6,13 @@ import { Configuration } from './shared/config/config.keys';
 import { ConfigModule } from './shared/config/config.module';
 import { ConfigService } from './shared/config/config.service';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   imports: [
     ConfigModule,
+
     MongooseModule.forRoot(
       new ConfigService().getDatabaseConnection(
         new ConfigService().get(Configuration.NODE_ENV),
@@ -19,6 +22,7 @@ import { UsersModule } from './users/users.module';
       },
     ),
     UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService, ConfigService, Logger],
