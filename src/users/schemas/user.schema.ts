@@ -10,7 +10,7 @@ export class User extends Document {
   @Prop({ type: String, required: false })
   password: string;
 
-  @Prop({ type: String, required: false, default: ROLES.seller.toString() })
+  @Prop({ type: String, required: false, default: ROLES[1] })
   rol: string;
 
   @Prop({ type: Date, required: true, default: Date.now })
@@ -22,8 +22,8 @@ export class User extends Document {
   @Prop({
     type: String,
     required: true,
-    default: STATUS.delete.toPrecision,
-    enum: [STATUS.active.toString(), STATUS.delete.toString()],
+    default: STATUS[0],
+    enum: STATUS,
   })
   status: string;
 }

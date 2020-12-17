@@ -22,7 +22,7 @@ export class UsersService {
   }
   async findByUser(user: string): Promise<User> {
     var users = await this.userModel
-      .find({ user: user, status: STATUS.active.toString() })
+      .find({ user: user, status: STATUS[0] })
       .exec();
     if (users.length > 0) return users[0];
     return null;
@@ -37,11 +37,7 @@ export class UsersService {
 
   async delete(userId: String): Promise<User> {
     return await this.userModel
-      .findByIdAndUpdate(
-        userId,
-        { status: STATUS.delete.toString() },
-        { new: true },
-      )
+      .findByIdAndUpdate(userId, { status: STATUS[1] }, { new: true })
       .exec();
   }
 }
