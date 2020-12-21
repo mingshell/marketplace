@@ -8,7 +8,6 @@ export class ConfigService {
 
   constructor() {
     ConfigService.env = process.env.NODE_ENV;
-
     if (ConfigService.env !== 'production') {
       const envFilePath = __dirname + '/../../../.env';
       const existsPath = fs.existsSync(envFilePath);

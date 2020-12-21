@@ -5,20 +5,29 @@ import { AppService } from './app.service';
 import { Configuration } from './shared/config/config.keys';
 import { ConfigModule } from './shared/config/config.module';
 import { ConfigService } from './shared/config/config.service';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { ProductsModule } from './products/products.module';
 
 @Module({
   imports: [
     ConfigModule,
+
     MongooseModule.forRoot(
       new ConfigService().getDatabaseConnection(
         new ConfigService().get(Configuration.NODE_ENV),
       ),
       {
         useFindAndModify: false,
+        useCreateIndex: true,
       },
     ),
+    UsersModule,
+    AuthModule,
+    ProductsModule,
   ],
   controllers: [AppController],
+
   providers: [AppService, ConfigService, Logger],
 })
 export class AppModule {
