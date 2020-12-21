@@ -50,7 +50,7 @@ export class ProductsController {
         'el sku ya existe, igrese uno nuevo por favor. ej: ' + generateSKU(),
       );
 
-    if (req.user != 'admin' && createProductDto.sellerId !== req.user._id)
+    if (req.user.rol != 'admin' && createProductDto.sellerId != req.user._id)
       throw new NotFoundException('sellerId no existe');
     let user = await this.usersService.findOne(createProductDto.sellerId);
     if (!user) throw new NotFoundException('sellerId no existe');
