@@ -2,7 +2,9 @@ import {
   BadRequestException,
   Body,
   Controller,
+  ForbiddenException,
   Get,
+  HttpException,
   HttpStatus,
   NotFoundException,
   Post,
@@ -35,7 +37,11 @@ export class ProductsController {
   @Post('/')
   @Roles('admin', 'seller')
   @UseGuards(JwtAuthGuard, RolesGuard)
-  async create(@Res() res, @Body() createProductDto: CreateProductDto) {
+  async create(
+    @Res() res,
+    @Req() req,
+    @Body() createProductDto: CreateProductDto,
+  ) {
     // VALIDACION DE DATOS
 
     let product = await this.productsService.findOneBySKU(createProductDto.sku);
@@ -43,6 +49,9 @@ export class ProductsController {
       throw new NotFoundException(
         'el sku ya existe, igrese uno nuevo por favor. ej: ' + generateSKU(),
       );
+
+    if (req.user != 'admin' && createProductDto.sellerId !== req.user._id)
+      throw new NotFoundException('sellerId no existe');
     let user = await this.usersService.findOne(createProductDto.sellerId);
     if (!user) throw new NotFoundException('sellerId no existe');
 
