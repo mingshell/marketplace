@@ -3,9 +3,9 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from './schemas/user.schema';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { SECRET_KEY_TOKEN } from 'src/shared/static/constants';
+import { SECRET_KEY_TOKEN } from '../shared/static/constants';
 
 @Module({
   imports: [

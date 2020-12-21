@@ -16,7 +16,7 @@ import { UsersService } from './users.service';
 import * as bcrypt from 'bcrypt';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { RolesGuard } from '../shared/guards/roles.guard';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Controller('users')
 @UsePipes(new ValidationPipe())
@@ -37,6 +37,7 @@ export class UsersController {
     userDto.password = bcrypt.hashSync(userDto.password, 10);
     let userCreated = await this.usersService.create(userDto);
     let token = await this.authService.login(userCreated);
+    token['id'] = userCreated._id;
     return res.status(HttpStatus.CREATED).json({
       data: token,
       message: 'Usuario creado con exito',
