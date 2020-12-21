@@ -10,17 +10,21 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
-import { Roles } from 'src/shared/decorators/roles.decorator';
+import { Roles } from '../shared/decorators/roles.decorator';
 import { UserDto } from './dtos/users.dto';
 import { UsersService } from './users.service';
 import * as bcrypt from 'bcrypt';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RolesGuard } from 'src/shared/guards/roles.guard';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { RolesGuard } from '../shared/guards/roles.guard';
+import { AuthService } from 'src/auth/auth.service';
 
 @Controller('users')
 @UsePipes(new ValidationPipe())
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+  ) {}
   /**
    * CREACIöN DE USUARIO
    * @param userDto --> UserDto
@@ -32,8 +36,9 @@ export class UsersController {
       throw new ConflictException('El usuario ya se encuntra registrado');
     userDto.password = bcrypt.hashSync(userDto.password, 10);
     let userCreated = await this.usersService.create(userDto);
+    let token = await this.authService.login(userCreated);
     return res.status(HttpStatus.CREATED).json({
-      data: { _id: userCreated._id },
+      data: token,
       message: 'Usuario creado con exito',
     });
   }

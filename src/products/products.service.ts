@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { STATUS } from 'src/shared/static/constants';
+import { STATUS } from '../shared/static/constants';
 import { CreateProductDto } from './dtos/create.product.dto';
 import { Product } from './schemas/product.schema';
 

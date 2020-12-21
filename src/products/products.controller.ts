@@ -11,12 +11,12 @@ import {
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { BuildQuery } from 'src/shared/decorators/build-query.decorator';
-import { Roles } from 'src/shared/decorators/roles.decorator';
-import { RolesGuard } from 'src/shared/guards/roles.guard';
-import { ValUserIdPipe } from 'src/users/pipes/valUserId.pipe';
-import { UsersService } from 'src/users/users.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { BuildQuery } from '../shared/decorators/build-query.decorator';
+import { Roles } from '../shared/decorators/roles.decorator';
+import { RolesGuard } from '../shared/guards/roles.guard';
+import { ValUserIdPipe } from '../users/pipes/valUserId.pipe';
+import { UsersService } from '../users/users.service';
 import { CreateProductDto } from './dtos/create.product.dto';
 import { QueryProductDto } from './dtos/query.product.dto';
 import { ProductsService } from './products.service';
@@ -99,7 +99,7 @@ export class ProductsController {
       if (!sellerId) productsFound = await this.productsService.findAll();
     } else {
       // Si el usuario no es administrador
-      if (sellerId !== req.user._id)
+      if (sellerId && sellerId !== req.user._id)
         throw new BadRequestException('sellerId no existe');
       productsFound = await this.productsService.findAll({
         sellerId: req.user._id,

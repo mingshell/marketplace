@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { ROLES, STATUS } from 'src/shared/static/constants';
+import { ROLES, STATUS } from '../../shared/static/constants';
 
 @Schema()
 export class User extends Document {
