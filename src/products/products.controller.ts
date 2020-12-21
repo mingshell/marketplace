@@ -79,7 +79,7 @@ export class ProductsController {
     if (data.priceMin) priceQuery['$gte'] = data.priceMin;
     if (data.priceMax) priceQuery['$lte'] = data.priceMax;
     if (data.sku) query['sku'] = data.sku;
-    query['price'] = priceQuery;
+    if (data.priceMin || data.priceMax) query['price'] = priceQuery;
     let productsFound = await this.productsService.findAll(query);
     return res.status(HttpStatus.OK).json({
       data: productsFound,
